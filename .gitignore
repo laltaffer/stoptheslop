@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+.output/
+
+# cloudflare
+.wrangler/
+
+# env
+.env
+.env.*
+!.env.example
+
+# scratch / transient artifacts
+.scratch/
+
+# private second-brain notes
+_brain.md
+CLAUDE.md
+CODEX_HANDOFF.md
+
+# os / editor
+.DS_Store
+*.log
