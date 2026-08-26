@@ -2,7 +2,7 @@
 
 **Live at [stoptheslop.pages.dev](https://stoptheslop.pages.dev)** (stoptheslop.com pending DNS).
 
-The internet is filling up with beige goo. This is a working library of the tools,
+A working library of the tools,
 guides, and standards that keep AI slop out of design, writing, code, and images.
 Every entry is read, used, or run by a person, gets a short plain-language note
 (never a rehash of the thing's own marketing), and carries a checked date. No scores,
@@ -15,7 +15,7 @@ Every entry is a markdown file in `src/entries/`.
 
 ## Stack
 
-Astro (static) on Cloudflare Pages. No client JavaScript. The blob is AI-generated;
+Astro (static) on Cloudflare Pages. ~2KB of hand-written JavaScript (the blob toy and scroll reveals), no framework. The blob is AI-generated;
 every word is a person's.
 
 ```sh

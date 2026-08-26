@@ -36,6 +36,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <div class="progress" aria-hidden="true"></div>
     <header class="masthead">
       <div class="wrap">
         <a class="wordmark" href="/">Stop the Slop<span class="dot">.</span></a>
@@ -67,5 +69,27 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         </figure>
       </div>
     </footer>
+    <script is:inline>
+      // Reveal-on-scroll: content is visible by default; the .js class gates the
+      // hidden initial state, so nothing can ever be stuck invisible without JS.
+      (function () {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.remove('js');
+          return;
+        }
+        var els = document.querySelectorAll('.module, .ecard, .footer .wrap');
+        if (!('IntersectionObserver' in window)) {
+          document.documentElement.classList.remove('js');
+          return;
+        }
+        els.forEach(function (el) { el.classList.add('reveal'); });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); }
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>

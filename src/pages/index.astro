@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import EntryRow from '../components/EntryRow.astro';
 import { loadEntries, CATEGORIES, fmtDate } from '../lib';
 
 const entries = await loadEntries();
@@ -8,42 +7,96 @@ const checked = fmtDate(new Date('2026-08-26'));
 ---
 <Base
   title="Stop the Slop: a library of everything fighting AI slop"
-  description="The internet is filling up with beige goo. This is a working library of the tools, guides, and standards that keep AI slop out of design, writing, code, and images."
+  description="A working library of the tools, guides, and standards that keep AI slop out of design, writing, code, and images. Collected and kept current by people who make things."
 >
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1 class="display">Stop the<br />Slop<span class="dot">.</span></h1>
+        <h1 class="display letters" aria-label="Stop the Slop.">
+          {['Stop', 'the'].map((word, wi) => (
+            <><span class="word" aria-hidden="true">
+              {word.split('').map((ch, ci) => <span class="letter" style={`--i:${wi * 5 + ci}`}>{ch}</span>)}
+            </span>{' '}</>
+          ))}
+          <br />
+          <span class="word" aria-hidden="true">
+            {'Slop'.split('').map((ch, ci) => <span class="letter" style={`--i:${9 + ci}`}>{ch}</span>)}
+          </span><span class="letter dot" aria-hidden="true" style="--i:13">.</span>
+        </h1>
         <p class="dek">
-          The internet is filling up with beige goo. This is a working library of the
-          tools, guides, and standards that keep AI slop out of design, writing, code,
-          and images. Collected and kept current by people who make things.
+          You know the look: purple gradients, glassy cards, prose that leans on the
+          em-dash. This is a working library of the tools, guides, and standards that
+          keep AI slop out of design, writing, code, and images. Collected and kept
+          current by people who make things.
         </p>
         <p class="meta">{entries.length} entries · every link checked {checked}</p>
       </div>
-      <figure class="hero-blob" aria-hidden="true">
-        <img src="/slop.webp" alt="" width="900" height="900" loading="eager" />
+      <figure class="hero-blob" id="blob" aria-hidden="true">
+        <img id="blob-img" src="/slop.webp" alt="" width="900" height="900" loading="eager" />
       </figure>
     </div>
   </section>
 
-  {CATEGORIES.map((cat) => {
-    const catEntries = entries.filter((e) => e.category === cat.slug);
-    if (catEntries.length === 0) return null;
-    return (
-      <section class="cat" aria-labelledby={`cat-${cat.slug}`}>
-        <header class="cat-band" style={`--band:${cat.color};--band-text:${cat.text}`}>
-          <div class="wrap cat-head">
-            <h2 class="display" id={`cat-${cat.slug}`}><a href={`/${cat.slug}/`}>{cat.label}</a></h2>
-            <span class="count">{catEntries.length} {catEntries.length === 1 ? 'entry' : 'entries'}</span>
-          </div>
-        </header>
-        <div class="wrap">
-          <div class="card">
-            {catEntries.map((entry) => <EntryRow entry={entry} />)}
-          </div>
-        </div>
-      </section>
-    );
-  })}
+  <div class="wrap">
+    <div class="mosaic">
+      {CATEGORIES.map((cat, i) => {
+        const catEntries = entries.filter((e) => e.category === cat.slug);
+        if (catEntries.length === 0) return null;
+        const spans = [7, 5, 5, 7, 12];
+        return (
+          <section
+            class="module"
+            aria-labelledby={`cat-${cat.slug}`}
+            style={`--band:${cat.color};--band-text:${cat.text};--span:${spans[i]}`}
+          >
+            <h2 class="display" id={`cat-${cat.slug}`}>
+              <a href={`/${cat.slug}/`}>{cat.label}</a>
+            </h2>
+            <p class="module-count">{catEntries.length} {catEntries.length === 1 ? 'entry' : 'entries'}, each read by a person</p>
+            <ul class="module-links">
+              {catEntries.map((e) => (
+                <li><a href={`/${cat.slug}/#${e.id}`}>{e.title}</a></li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
+  </div>
+
+  <script is:inline>
+    // The blob is a toy: squish it, it plays dead, it gets back up.
+    (function () {
+      var blob = document.getElementById('blob');
+      var img = document.getElementById('blob-img');
+      if (!blob || !img) return;
+      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var busy = false;
+      blob.addEventListener('click', function () {
+        if (busy) return;
+        busy = true;
+        img.src = '/slop-stopped.webp';
+        blob.classList.add('splat');
+        setTimeout(function () {
+          img.src = '/slop.webp';
+          blob.classList.remove('splat');
+          busy = false;
+        }, 1100);
+      });
+      if (!reduced && matchMedia('(pointer: fine)').matches) {
+        var hero = document.querySelector('.hero');
+        var raf = null;
+        hero.addEventListener('pointermove', function (e) {
+          if (raf || busy) return;
+          raf = requestAnimationFrame(function () {
+            var r = blob.getBoundingClientRect();
+            var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+            img.style.transform = 'rotate(' + (-5 + dx * 7) + 'deg)';
+            raf = null;
+          });
+        });
+        hero.addEventListener('pointerleave', function () { img.style.transform = ''; });
+      }
+    })();
+  </script>
 </Base>

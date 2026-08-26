@@ -1,15 +1,20 @@
 ---
-import { fmtDate } from '../lib';
+import { CATEGORIES, fmtDate } from '../lib';
 const { entry } = Astro.props;
-// The dense citation row is deliberate library anatomy — reviewed keep.
+const cat = CATEGORIES.find((c) => c.slug === entry.category);
+// The dense citation card is deliberate library anatomy — reviewed keep.
 const allow = ['layout/overstuffed-row', entry.slop_allow].filter(Boolean).join(' ');
 const { Content } = entry;
 ---
-<article class="entry" id={entry.id} data-slop-allow={allow}>
-  <div class="main">
-    <h3><a href={entry.url} rel="noopener">{entry.title}</a></h3>
-    <p class="source">{entry.source}</p>
-    <div class="note"><Content /></div>
-  </div>
+<article
+  class="ecard"
+  id={entry.id}
+  data-slop-allow={allow}
+  style={`--chip:${cat.color};--chip-text:${cat.text === '#247BA0' ? '#0F0E0C' : cat.text}`}
+>
+  <a class="chip" href={`/${cat.slug}/`}>{cat.label}</a>
+  <h3><a href={entry.url} rel="noopener">{entry.title}</a></h3>
+  <p class="source">{entry.source}</p>
+  <div class="note"><Content /></div>
   <span class="checked">checked {fmtDate(entry.last_checked)}</span>
 </article>
