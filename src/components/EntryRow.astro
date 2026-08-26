@@ -1,18 +1,13 @@
 ---
-import { VERDICTS, fmtDate } from '../lib';
+import { fmtDate } from '../lib';
 const { entry } = Astro.props;
-const v = VERDICTS[entry.verdict];
-const rel = entry.nofollow ? 'nofollow noopener' : 'noopener';
 // The dense citation row is deliberate library anatomy — reviewed keep.
 const allow = ['layout/overstuffed-row', entry.slop_allow].filter(Boolean).join(' ');
 const { Content } = entry;
 ---
-<article class="entry" data-verdict={entry.verdict} id={entry.id} data-slop-allow={allow}>
-  <div class="margin">
-    <span class={`verdict verdict-${entry.verdict}`}>{v.label}</span>
-  </div>
+<article class="entry" id={entry.id} data-slop-allow={allow}>
   <div class="main">
-    <h3><a href={entry.url} rel={rel}>{entry.title}</a></h3>
+    <h3><a href={entry.url} rel="noopener">{entry.title}</a></h3>
     <p class="source">{entry.source}</p>
     <div class="note"><Content /></div>
   </div>

@@ -12,7 +12,7 @@ const entries = all.filter((e) => e.category === cat.slug);
 const checked = fmtDate(new Date('2026-08-26'));
 const descriptions: Record<string, string> = {
   design: 'Detectors, tell catalogs, and reference archives that keep AI slop out of visual and product design.',
-  copy: 'Field guides and standards for AI prose: what to read, what to join, and which detectors to refuse.',
+  copy: 'Field guides and standards for AI prose: what to read, what to join, and what the detectors get wrong.',
   code: 'The accountability standards for AI-assisted code, from the people who maintain real infrastructure.',
   images: 'Provenance standards and artists’ tools against generated-image slop.',
   meta: 'The journalists, critics, and quiet corners keeping the human internet legible.',
@@ -23,7 +23,7 @@ const descriptions: Record<string, string> = {
   description={descriptions[cat.slug]}
   current={cat.slug}
 >
-  <section class="hero">
+  <section class="hero cat-hero" style={`--band:${cat.color};--band-text:${cat.text}`}>
     <div class="wrap">
       <h1 class="display">{cat.label}<span class="dot">.</span></h1>
       <p class="dek">{descriptions[cat.slug]}</p>

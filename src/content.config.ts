@@ -9,9 +9,7 @@ const entries = defineCollection({
     source: z.string(),
     category: z.enum(['design', 'copy', 'code', 'images', 'meta']),
     tags: z.array(z.string()).default([]),
-    verdict: z.enum(['go', 'caution', 'stop']),
     last_checked: z.coerce.date(),
-    nofollow: z.boolean().default(false),
     slop_allow: z.string().optional(),
   }),
 });

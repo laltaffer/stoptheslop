@@ -7,4 +7,4 @@ verdict: caution
 last_checked: 2026-08-26
 slop_allow: copy/fabricated-precision
 ---
-The production-test tells are the best part: "Jane Doe" casting, BETA pills in heroes, "scroll to explore" cues, 99.99% numbers. The correction: it's genre-blind. A "Field Notes" label is costume on a SaaS page and native register on an outfitter site. Read it as advisories, not law.
+The production-test tells are the best part: "Jane Doe" casting, BETA pills in heroes, "scroll to explore" cues, 99.99% numbers. One catch: it's genre-blind. A "Field Notes" label is costume on a SaaS page and native register on an outfitter site. Read it as advisories, not law.

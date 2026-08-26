@@ -1,32 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
 import EntryRow from '../components/EntryRow.astro';
-import { loadEntries, CATEGORIES, VERDICTS, fmtDate } from '../lib';
+import { loadEntries, CATEGORIES, fmtDate } from '../lib';
 
 const entries = await loadEntries();
 const checked = fmtDate(new Date('2026-08-26'));
 ---
 <Base
-  title="Stop the Slop: tools, guides, and standards for work that doesn't look AI-generated"
-  description="A big, opinionated list of the tools, guides, and standards that keep AI slop out of design, writing, code, and images. A person read every one and gave it a straight verdict: GO, CAUTION, or STOP."
+  title="Stop the Slop: a library of everything fighting AI slop"
+  description="The internet is filling up with beige goo. This is a working library of the tools, guides, and standards that keep AI slop out of design, writing, code, and images."
 >
   <section class="hero">
-    <div class="wrap">
-      <h1 class="display">Stop the<br />Slop<span class="dot">.</span></h1>
-      <p class="dek">
-        A big, opinionated list of the tools, guides, and standards that keep AI slop out
-        of design, writing, code, and images. A person read every one and gave it a
-        straight verdict.
-      </p>
-      <dl class="pills">
-        {Object.entries(VERDICTS).map(([key, v]) => (
-          <div class="pill-row">
-            <dt><span class={`verdict verdict-${key}`}>{v.label}</span></dt>
-            <dd>{v.gloss}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="meta">{entries.length} entries · all links checked {checked}</p>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="display">Stop the<br />Slop<span class="dot">.</span></h1>
+        <p class="dek">
+          The internet is filling up with beige goo. This is a working library of the
+          tools, guides, and standards that keep AI slop out of design, writing, code,
+          and images. Collected and kept current by people who make things.
+        </p>
+        <p class="meta">{entries.length} entries · every link checked {checked}</p>
+      </div>
+      <figure class="hero-blob" aria-hidden="true">
+        <img src="/slop.webp" alt="" width="900" height="900" loading="eager" />
+      </figure>
     </div>
   </section>
 
@@ -35,11 +32,13 @@ const checked = fmtDate(new Date('2026-08-26'));
     if (catEntries.length === 0) return null;
     return (
       <section class="cat" aria-labelledby={`cat-${cat.slug}`}>
-        <div class="wrap">
-          <header class="cat-head">
+        <header class="cat-band" style={`--band:${cat.color};--band-text:${cat.text}`}>
+          <div class="wrap cat-head">
             <h2 class="display" id={`cat-${cat.slug}`}><a href={`/${cat.slug}/`}>{cat.label}</a></h2>
             <span class="count">{catEntries.length} {catEntries.length === 1 ? 'entry' : 'entries'}</span>
-          </header>
+          </div>
+        </header>
+        <div class="wrap">
           <div class="card">
             {catEntries.map((entry) => <EntryRow entry={entry} />)}
           </div>

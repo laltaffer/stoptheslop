@@ -1,20 +1,12 @@
 import { getCollection, render } from 'astro:content';
 
 export const CATEGORIES = [
-  { slug: 'design', label: 'Design' },
-  { slug: 'copy', label: 'Copy' },
-  { slug: 'code', label: 'Code' },
-  { slug: 'images', label: 'Images' },
-  { slug: 'meta', label: 'Meta' },
+  { slug: 'design', label: 'Design', color: '#8A53FF', text: '#FFFFFF' },
+  { slug: 'copy', label: 'Copy', color: '#FFD80C', text: '#0F0E0C' },
+  { slug: 'code', label: 'Code', color: '#3CCB09', text: '#0F0E0C' },
+  { slug: 'images', label: 'Images', color: '#F8C1BA', text: '#0F0E0C' },
+  { slug: 'meta', label: 'Meta', color: '#0500A3', text: '#FFFFFF' },
 ] as const;
-
-export const VERDICTS = {
-  go: { label: 'GO', gloss: 'Good. Use it.' },
-  caution: { label: 'CAUTION', gloss: 'Useful, but read the note first.' },
-  stop: { label: 'STOP', gloss: 'Save yourself the trip.' },
-} as const;
-
-const verdictOrder = { go: 0, caution: 1, stop: 2 } as const;
 
 export async function loadEntries() {
   const raw = await getCollection('entries');
@@ -24,10 +16,7 @@ export async function loadEntries() {
       return { ...e.data, id: e.id, Content };
     })
   );
-  prepared.sort(
-    (a, b) =>
-      verdictOrder[a.verdict] - verdictOrder[b.verdict] || a.title.localeCompare(b.title)
-  );
+  prepared.sort((a, b) => a.title.localeCompare(b.title));
   return prepared;
 }
 

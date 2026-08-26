@@ -6,4 +6,4 @@ category: meta
 verdict: caution
 last_checked: 2026-08-26
 ---
-The angriest man in AI criticism, and often the earliest right; the rot-economy thesis aged well. The correction: bring salt. The rage is the engine and sometimes the steering.
+The angriest man in AI criticism, and often the earliest right; the rot-economy thesis aged well. Bring salt: the rage is the engine and sometimes the steering.
