@@ -2,23 +2,21 @@
 
 **Live at [stoptheslop.pages.dev](https://stoptheslop.pages.dev)** (stoptheslop.com pending DNS).
 
-A curated, marked-up library of the tools, guides, and standards people actually use to
-keep AI slop out of design, writing, code, and images. Every entry is read, judged, and
-dated by a person, then given a straight verdict:
-
-- **GO** — good. Use it.
-- **CAUTION** — useful, but read the note first.
-- **STOP** — we tried it so you don't have to.
+The internet is filling up with beige goo. This is a working library of the tools,
+guides, and standards that keep AI slop out of design, writing, code, and images.
+Every entry is read, used, or run by a person, gets a short plain-language note
+(never a rehash of the thing's own marketing), and carries a checked date. No scores,
+no rankings: we collect, you decide.
 
 ## Contributing
 
-Corrections, dead links, and nominations: [open an issue](https://github.com/laltaffer/stoptheslop/issues).
-Every entry is a markdown file in `src/entries/` with a one-paragraph editorial note —
-opinions, not summaries.
+Something missing, dead, or wrong? [Open an issue](https://github.com/laltaffer/stoptheslop/issues).
+Every entry is a markdown file in `src/entries/`.
 
 ## Stack
 
-Astro (static) on Cloudflare Pages. No JavaScript ships to the client.
+Astro (static) on Cloudflare Pages. No client JavaScript. The blob is AI-generated;
+every word is a person's.
 
 ```sh
 npm install
