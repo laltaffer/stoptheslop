@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryRow from '../components/EntryRow.astro';
+import { loadEntries, CATEGORIES, fmtDate } from '../lib';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((c) => ({ params: { category: c.slug }, props: { cat: c } }));
+}
+const { cat } = Astro.props;
+const all = await loadEntries();
+const entries = all.filter((e) => e.category === cat.slug);
+const checked = fmtDate(new Date('2026-08-26'));
+const descriptions: Record<string, string> = {
+  design: 'Detectors, tell catalogs, and reference archives for keeping AI slop out of visual and product design.',
+  copy: 'Field guides, standards, and verdicts on AI prose: what to read, what to join, and which detectors to refuse.',
+  code: 'The accountability standards for AI-assisted code, from the people who maintain real infrastructure.',
+  images: 'Provenance standards and artists’ tools against generated-image slop.',
+  meta: 'The journalists, critics, and quiet corners keeping the human internet legible.',
+};
+---
+<Base
+  title={`${cat.label} · Stop the Slop`}
+  description={descriptions[cat.slug]}
+  current={cat.slug}
+>
+  <section class="hero">
+    <div class="wrap">
+      <h1>{cat.label}<span class="dot">.</span></h1>
+      <p class="dek">{descriptions[cat.slug]}</p>
+      <p class="meta">{entries.length} {entries.length === 1 ? 'entry' : 'entries'} · links checked {checked}</p>
+    </div>
+  </section>
+  <div class="wrap">
+    {entries.map((entry) => <EntryRow entry={entry} />)}
+  </div>
+</Base>

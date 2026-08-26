@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryRow from '../components/EntryRow.astro';
+import { loadEntries, CATEGORIES, VERDICTS, fmtDate } from '../lib';
+
+const entries = await loadEntries();
+const checked = fmtDate(new Date('2026-08-26'));
+---
+<Base
+  title="Stop the Slop: a marked-up library of anti-slop tools, guides, and standards"
+  description="The tools, guides, and standards people actually use to keep AI slop out of design, writing, code, and images. Every entry read, judged, and marked by a person."
+>
+  <section class="hero">
+    <div class="wrap">
+      <h1>
+        Stop the<br />
+        <span class="circled">slop<svg viewBox="0 0 100 60" fill="none" aria-hidden="true" preserveAspectRatio="none"><path d="M8 34 C6 16 30 5 55 6 C82 7 97 16 96 30 C95 46 72 56 46 55 C22 54 8 46 9 32 C10 20 28 10 50 9" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg></span><span class="dot">.</span>
+      </h1>
+      <p class="dek">
+        A working library of the tools, guides, and standards people actually use to keep
+        AI slop out of design, writing, code, and images. Every entry read, judged, and
+        marked by a person.
+      </p>
+      <p class="meta">{entries.length} entries · all links checked {checked}</p>
+      <!-- dele (pigtail): the proofreader's deletion mark, drawn as marginalia -->
+      <svg class="hero-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path
+          d="M16 12 C34 30 52 48 62 60 C70 69 80 68 82 59 C84 50 74 45 68 51 C62 57 66 68 76 76 C82 81 88 84 92 86"
+          stroke="currentColor" stroke-width="6" stroke-linecap="round"
+        />
+      </svg>
+    </div>
+  </section>
+
+  <section class="legend" aria-label="The marks">
+    <div class="wrap">
+      <h2>The marks</h2>
+      <dl>
+        {Object.entries(VERDICTS).map(([key, v]) => (
+          <div class="legend-row">
+            <dt><span class={`verdict verdict-${key}`}>{v.mark}</span></dt>
+            <dd>{v.gloss}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  {CATEGORIES.map((cat) => {
+    const catEntries = entries.filter((e) => e.category === cat.slug);
+    if (catEntries.length === 0) return null;
+    return (
+      <section aria-labelledby={`cat-${cat.slug}`}>
+        <header class="band">
+          <div class="wrap">
+            <span class="cat-mark">{cat.mark}</span>
+            <h2 id={`cat-${cat.slug}`}><a href={`/${cat.slug}/`}>{cat.label}</a></h2>
+            <span class="count">{catEntries.length} {catEntries.length === 1 ? 'entry' : 'entries'}</span>
+          </div>
+        </header>
+        <div class="wrap">
+          {catEntries.map((entry) => <EntryRow entry={entry} />)}
+        </div>
+      </section>
+    );
+  })}
+</Base>

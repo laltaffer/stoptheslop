@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+export interface Props {
+  title: string;
+  description: string;
+  current?: string;
+}
+const { title, description, current } = Astro.props;
+const cats = [
+  { slug: 'design', label: 'Design' },
+  { slug: 'copy', label: 'Copy' },
+  { slug: 'code', label: 'Code' },
+  { slug: 'images', label: 'Images' },
+  { slug: 'meta', label: 'Meta' },
+];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@75..125,600..900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="wrap">
+        <a class="wordmark" href="/">Stop the Slop<span class="dot">.</span></a>
+        <nav class="site-nav" aria-label="Categories">
+          {cats.map((c) => (
+            <a href={`/${c.slug}/`} aria-current={current === c.slug ? 'page' : undefined}>{c.label}</a>
+          ))}
+          <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        <p class="errata">Errata welcome<span style="color:var(--red)">.</span></p>
+        <p>
+          Missing something good? Marked something wrong? The library takes corrections the way any
+          honest document does: <a href="https://github.com/laltaffer/stoptheslop/issues">submit an erratum</a>.
+        </p>
+        <p class="colophon">
+          Set in Anybody and Literata, marked in red pen, blue pencil, and highlighter. Assembled with AI
+          assistance; read, judged, and marked by a person; that distinction is the entire point of this site. Richmond, Virginia.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,228 @@
+/* Stop the Slop — "The Errata Slip", re-executed 2026-08-26 after Lawrence's
+   "old newspaper / dated" verdict: same marks world, contemporary register.
+   Red pen, blue editor's pencil, highlighter — on bright proof-white.
+   Red is the mark; blue is the pencil; highlighter flags corrections.
+   No mono anywhere, by design. */
+
+:root {
+  --paper: #FFFDF7;
+  --ink: #17120C;
+  --ink-soft: #6E6558;
+  --red: #F52A14;
+  --pencil: #1666E8;
+  --pencil-wash: #C9E6FF;
+  --hilite: #FFE83D;
+  --rule: #E6E0D2;
+  --font-display: 'Anybody', 'Arial Black', sans-serif;
+  --font-body: 'Literata', 'Georgia', serif;
+  --measure: 62ch;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--paper); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--ink); text-decoration-color: var(--pencil); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--red); }
+
+.wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.1rem; }
+
+.dot { color: var(--red); }
+
+/* ---------- masthead ---------- */
+.masthead {
+  border-bottom: 4px solid var(--ink);
+}
+.masthead .wrap {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem 1.4rem;
+  padding-top: 1rem; padding-bottom: .8rem;
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 110;
+  font-size: 1.35rem;
+  letter-spacing: .01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.wordmark .dot { color: var(--red); }
+.site-nav { display: flex; flex-wrap: wrap; gap: .2rem 1.05rem; }
+.site-nav a {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover, .site-nav a[aria-current="page"] { border-bottom-color: var(--red); }
+
+/* ---------- hero ---------- */
+.hero { padding: 2.6rem 0 2.2rem; border-bottom: 1px solid var(--rule); }
+.hero .wrap { position: relative; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: 'wdth' 115;
+  font-size: clamp(3rem, 13vw, 7.6rem);
+  line-height: .98;
+  margin: 0 0 1.2rem;
+  letter-spacing: -.01em;
+}
+.circled { position: relative; display: inline-block; }
+.circled svg {
+  position: absolute; inset: -18% -12% -22% -10%;
+  width: 122%; height: 140%;
+  color: var(--red);
+  overflow: visible;
+  pointer-events: none;
+}
+.hero h1 .dot { color: var(--red); }
+.hero .dek {
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+  max-width: var(--measure);
+  margin: 0 0 1.2rem;
+}
+.hero .meta {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin: 0;
+}
+.hero-mark {
+  position: absolute; right: 2rem; top: 1.4rem;
+  width: clamp(90px, 18vw, 260px); height: auto;
+  color: var(--red);
+  pointer-events: none;
+}
+@media (max-width: 720px) { .hero-mark { display: none; } }
+
+/* ---------- legend ---------- */
+.legend { padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
+.legend h2 {
+  font-family: var(--font-display); font-weight: 750; font-size: 1.05rem;
+  margin: 0 0 .8rem; letter-spacing: .02em;
+}
+.legend dl { margin: 0; display: grid; gap: .55rem; }
+.legend .legend-row { display: flex; align-items: baseline; gap: .8rem; }
+.legend dt { flex-shrink: 0; }
+.legend dd { margin: 0; color: var(--ink-soft); font-size: .98rem; }
+@media (min-width: 880px) {
+  .legend dl { grid-template-columns: 1fr 1fr 1fr; gap: 1.4rem; }
+}
+
+/* ---------- verdict marks (the margin notation) ---------- */
+.verdict {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .92rem;
+  line-height: 1;
+  display: inline-block;
+  padding: .34em .7em .42em;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  white-space: nowrap;
+}
+.verdict-stet { color: var(--pencil); }
+.verdict-ok-wc { color: var(--ink); background: var(--hilite); border-color: var(--hilite); }
+.verdict-kill { color: var(--red); }
+
+/* ---------- category bands ---------- */
+.band {
+  border-top: 4px solid var(--ink);
+  margin-top: 3.4rem;
+}
+.band .wrap {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding-top: .7rem; padding-bottom: .2rem;
+}
+.band h2 {
+  font-family: var(--font-display); font-weight: 850;
+  font-variation-settings: 'wdth' 112;
+  font-size: clamp(2rem, 6vw, 3.1rem); margin: 0; letter-spacing: -.01em; line-height: 1;
+}
+.band h2 a { text-decoration: none; }
+.band h2 a:hover { color: var(--red); }
+.band .cat-mark {
+  font-family: var(--font-display); font-weight: 600; font-size: .95rem;
+  color: var(--pencil);
+  border: 2px solid var(--pencil); border-radius: 50%;
+  padding: .3em .65em .38em; line-height: 1;
+}
+.band .count { margin-left: auto; font-style: italic; font-size: .92rem; color: var(--ink-soft); }
+
+/* ---------- entries ---------- */
+.entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .5rem;
+  padding: 1.35rem 0 1.45rem;
+  border-bottom: 1px solid var(--rule);
+}
+.entry:last-child { border-bottom: 0; }
+.entry .margin { display: flex; align-items: center; gap: .8rem; }
+.entry .checked { font-style: italic; color: var(--ink-soft); font-size: .88rem; }
+.entry h3 {
+  font-family: var(--font-display); font-weight: 750;
+  font-variation-settings: 'wdth' 100;
+  font-size: 1.35rem; line-height: 1.15;
+  margin: 0;
+}
+.entry h3 a { text-decoration-thickness: 2.5px; }
+.entry .source { color: var(--ink-soft); font-size: .95rem; margin: .15rem 0 0; font-style: italic; }
+.entry .note { max-width: var(--measure); }
+.entry .note p { margin: .55rem 0 0; font-size: 1rem; }
+.entry .note em { font-style: italic; }
+
+@media (min-width: 880px) {
+  .entry {
+    grid-template-columns: 7.2rem 1fr 8.5rem;
+    gap: 1.4rem;
+  }
+  .entry .margin { display: block; }
+  .entry .margin .verdict { margin-top: .3rem; }
+  .entry .checked { text-align: right; padding-top: .45rem; }
+}
+
+/* kill rows: the mark bleeds into the row */
+.entry[data-verdict="kill"] h3 a { text-decoration-color: var(--red); }
+
+/* ---------- prose pages (about) ---------- */
+.prose { padding-top: 2.4rem; padding-bottom: 3rem; }
+.prose h1 {
+  font-family: var(--font-display); font-weight: 900;
+  font-variation-settings: 'wdth' 112;
+  font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.02; margin: 0 0 1.4rem;
+}
+.prose h2 {
+  font-family: var(--font-display); font-weight: 750;
+  font-size: 1.45rem; margin: 2.2rem 0 .6rem;
+}
+.prose p, .prose li { max-width: var(--measure); }
+.prose .strike { text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+.prose .fix { color: var(--red); font-style: italic; }
+
+/* ---------- footer ---------- */
+.footer {
+  margin-top: 3.6rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+.footer a { color: var(--paper); text-decoration-color: var(--hilite); }
+.footer a:hover { text-decoration-color: var(--red); }
+.footer .wrap { padding-top: 1.6rem; padding-bottom: 2.2rem; }
+.footer p { max-width: var(--measure); margin: .4rem 0; font-size: .95rem; }
+.footer .errata {
+  font-family: var(--font-display); font-weight: 850; font-size: 1.7rem;
+  font-variation-settings: 'wdth' 112;
+  margin: 0 0 .6rem;
+}
+.footer .colophon { color: #B9B2A6; font-style: italic; font-size: .88rem; margin-top: 1.2rem; }

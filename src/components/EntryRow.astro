@@ -1,0 +1,20 @@
+---
+import { VERDICTS, fmtDate } from '../lib';
+const { entry } = Astro.props;
+const v = VERDICTS[entry.verdict];
+const rel = entry.nofollow ? 'nofollow noopener' : 'noopener';
+// The dense citation row IS the locked four-column leaflet anatomy (_brain.md) — deliberate keep.
+const allow = ['layout/overstuffed-row', entry.slop_allow].filter(Boolean).join(' ');
+const { Content } = entry;
+---
+<article class="entry" data-verdict={entry.verdict} id={entry.id} data-slop-allow={allow}>
+  <div class="margin">
+    <span class={`verdict verdict-${entry.verdict}`}>{v.mark}</span>
+  </div>
+  <div class="main">
+    <h3><a href={entry.url} rel={rel}>{entry.title}</a></h3>
+    <p class="source">{entry.source}</p>
+    <div class="note"><Content /></div>
+  </div>
+  <span class="checked">checked {fmtDate(entry.last_checked)}</span>
+</article>
