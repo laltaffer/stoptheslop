@@ -4,11 +4,11 @@
 
 A curated, marked-up library of the tools, guides, and standards people actually use to
 keep AI slop out of design, writing, code, and images. Every entry is read, judged, and
-dated by a person, then stamped with a plain verdict:
+dated by a person, then given a straight verdict:
 
-- **Use it.** Genuinely good.
-- **Yes, but.** Useful, with a caveat named in the note.
-- **Kill.** Did not survive a close read.
+- **GO** — good. Use it.
+- **CAUTION** — useful, but read the note first.
+- **STOP** — we tried it so you don't have to.
 
 ## Contributing
 
