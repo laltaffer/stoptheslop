@@ -3,7 +3,7 @@ title: "taste-skill"
 url: https://github.com/Leonxlnx/taste-skill
 source: Leonxlnx
 category: design
-verdict: ok-wc
+verdict: caution
 last_checked: 2026-08-26
 slop_allow: copy/fabricated-precision
 ---

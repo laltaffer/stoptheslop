@@ -3,7 +3,7 @@ title: "AI humanizers"
 url: https://undetectable.ai
 source: "Undetectable AI, et al."
 category: copy
-verdict: kill
+verdict: stop
 last_checked: 2026-08-26
 nofollow: true
 ---

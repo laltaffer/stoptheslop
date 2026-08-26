@@ -1,20 +1,20 @@
 import { getCollection, render } from 'astro:content';
 
 export const CATEGORIES = [
-  { slug: 'design', label: 'Design', mark: 'des.' },
-  { slug: 'copy', label: 'Copy', mark: 'copy' },
-  { slug: 'code', label: 'Code', mark: 'code' },
-  { slug: 'images', label: 'Images', mark: 'img.' },
-  { slug: 'meta', label: 'Meta', mark: 'meta' },
+  { slug: 'design', label: 'Design' },
+  { slug: 'copy', label: 'Copy' },
+  { slug: 'code', label: 'Code' },
+  { slug: 'images', label: 'Images' },
+  { slug: 'meta', label: 'Meta' },
 ] as const;
 
 export const VERDICTS = {
-  stet: { mark: 'stet.', gloss: 'Let it stand. Use it.' },
-  'ok-wc': { mark: 'ok w/c', gloss: 'Useful. Read the caveat.' },
-  kill: { mark: 'kill.', gloss: 'Did not survive a close read.' },
+  go: { label: 'GO', gloss: 'Good. Use it.' },
+  caution: { label: 'CAUTION', gloss: 'Useful, but read the note first.' },
+  stop: { label: 'STOP', gloss: 'Save yourself the trip.' },
 } as const;
 
-const verdictOrder = { stet: 0, 'ok-wc': 1, kill: 2 } as const;
+const verdictOrder = { go: 0, caution: 1, stop: 2 } as const;
 
 export async function loadEntries() {
   const raw = await getCollection('entries');

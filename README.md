@@ -4,11 +4,11 @@
 
 A curated, marked-up library of the tools, guides, and standards people actually use to
 keep AI slop out of design, writing, code, and images. Every entry is read, judged, and
-dated by a person, then marked in the proofreader's own vocabulary:
+dated by a person, then stamped with a plain verdict:
 
-- **stet.** — let it stand. Use it.
-- **ok w/c** — OK with corrections. Useful; read the caveat.
-- **kill.** — did not survive a close read.
+- **Use it.** Genuinely good.
+- **Yes, but.** Useful, with a caveat named in the note.
+- **Kill.** Did not survive a close read.
 
 ## Contributing
 
