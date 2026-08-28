@@ -1,6 +1,6 @@
 # Stop the Slop
 
-**Live at [stoptheslop.pages.dev](https://stoptheslop.pages.dev)** (stoptheslop.com pending DNS).
+**Live at [stoptheslop.design](https://stoptheslop.design)** (and stoptheslop.pages.dev).
 
 A working library of the tools,
 guides, and standards that keep AI slop out of design, writing, code, and images.

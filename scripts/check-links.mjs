@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 const dir = new URL('../src/entries', import.meta.url).pathname;
 const files = (await readdir(dir)).filter((f) => f.endsWith('.md'));
-const UA = 'Mozilla/5.0 (Macintosh) StopTheSlop-link-check/1.0 (+https://stoptheslop.com)';
+const UA = 'Mozilla/5.0 (Macintosh) StopTheSlop-link-check/1.0 (+https://stoptheslop.design)';
 let failures = 0;
 
 for (const f of files) {
